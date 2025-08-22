@@ -1,25 +1,32 @@
-new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date('Jul 17, 2019'),
-});
+const daysV = document.querySelector('span[data-value="days"]');
+const hoursV = document.querySelector('span[data-value="hours"]');
+const minsV = document.querySelector('span[data-value="mins"]');
+const secsV = document.querySelector('span[data-value="secs"]');
 
-const days = Math.floor(time / (1000 * 60 * 60 * 24));
-​
-/*
- * Решта годин: отримуємо залишок від попереднього розрахунку за допомогою оператора
- * залишку% і ділимо його на кількість мілісекунд в одній годині
- * (1000 * 60 * 60 = мілісекунди * хвилини * секунди)
- */
-const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-​
-/*
- * Решта хвилин: отримуємо хвилини, що залишилися і ділимо їх на кількість
- * мілісекунд в одній хвилині (1000 * 60 = мілісекунди * секунди)
- */
-const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-​
-/*
- * Решта секунд: отримуємо секунди, які залишилися і ділимо їх на кількість
- * миллисекунд в одной секунде (1000)
- */
-const secs = Math.floor((time % (1000 * 60)) / 1000);
+const daysNumber = daysV.textContent;
+const hoursNumber = hoursV.textContent;
+const minsNumber = minsV.textContent;
+const secsNumber = secsV.textContent;
+
+const targetDate = new Date(2025, 8, 1, 0, 0, 0);
+console.log(targetDate);
+
+
+function updateClockface(time) {
+  setInterval(() => {
+    const time = targetDate - new Date();
+    console.log(time);
+    
+    const days = Math.floor(time / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((time % (1000 * 60)) / 1000);
+
+    daysV.textContent = days < 10 ? `0${days}` : days;
+    hoursV.textContent = hours < 10 ? `0${hours}` : hours;
+    minsV.textContent = mins < 10 ? `0${mins}` : mins;
+    secsV.textContent = secs < 10 ? `0${secs}` : secs;
+  }, 1000);
+}
+
+updateClockface();
