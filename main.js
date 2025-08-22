@@ -12,7 +12,7 @@ const targetDate = new Date(2025, 8, 1, 0, 0, 0);
 console.log(targetDate);
 
 
-function updateClockface(time) {
+function updateClock(time) {
   setInterval(() => {
     const time = targetDate - new Date();
     console.log(time);
@@ -29,4 +29,4 @@ function updateClockface(time) {
   }, 1000);
 }
 
-updateClockface();
+updateClock();
